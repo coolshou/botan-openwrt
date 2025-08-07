@@ -39,7 +39,7 @@ RSTRIP:= \
 define Package/botan2/Default
   SECTION:=libs
   CATEGORY:=Libraries
-  SUBMENU:=botan
+  SUBMENU:=botan2
   TITLE:=Botan2
   URL:=https://github.com/coolshou/botan.git
   DEPENDS:=+librt +zlib +libstdcpp +libgcc +glib2 +libpthread +libatomic +libopenssl3
@@ -48,9 +48,21 @@ endef
 define Package/botan2
   $(call Package/botan2/Default)
   TITLE+=botan
+  DEPENDS:= +openssl
 endef
+
 define Package/botan2/description
 	Botan (Japanese for peony flower) is a cryptography library released under the permissive Simplified BSD license.
+endef
+
+define Build/InstallDev
+	$(MAKE) -C $(PKG_BUILD_DIR) install
+	$(CP) $(PKG_BUILD_DIR)/libbotan-2.a $(TOOLCHAIN_DIR)/lib/
+endef
+
+define Package/botan2/install
+	$(INSTALL_DIR) $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/libbotan.so* $(1)/usr/lib/
 endef
 
 define Build/Configure
@@ -87,16 +99,5 @@ define Build/Compile
 	CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS)" \
 	$(MAKE) -j4 -C $(PKG_BUILD_DIR)
 endef
-
-define Build/InstallDev
-	$(MAKE) -C $(PKG_BUILD_DIR) install
-	$(CP) $(PKG_BUILD_DIR)/libbotan-2.a $(TOOLCHAIN_DIR)/lib/
-endef
-
-define Package/botan2/install
-	$(INSTALL_DIR) $(1)/usr/lib/
-	$(CP) $(PKG_BUILD_DIR)/libbotan.so* $(1)/usr/lib/
-endef
-
 
 $(eval $(call BuildPackage,botan2))
