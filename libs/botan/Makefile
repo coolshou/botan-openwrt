@@ -43,6 +43,7 @@ define Package/botan/description
 endef
 
 define Package/botan/install
+	$(MAKE) -C $(PKG_BUILD_DIR) install
 	$(INSTALL_DIR) $(1)/usr/lib/
 	$(CP) $(PKG_BUILD_DIR)/libbotan-2.so* $(1)/usr/lib/
 endef
@@ -61,6 +62,7 @@ define Build/Configure
 		--ar-options="cqs" \
 		--cxxflags="$(TARGET_CFLAGS) $(EXTRA_CFLAGS)" \
 		--ldflags="$(TARGET_LDFLAGS) $(EXTRA_LDFLAGS)" \
+		--prefix=$(TOOLCHAIN_DIR) \
 		--without-sphinx \
 		--without-rst2man \
 	)
