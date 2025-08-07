@@ -19,8 +19,7 @@ make menuconfig
 ```
 4. make package
 ```
-make package/botan2/download
-make package/botan2/clean
-make package/botan2/dirclean
-make package/botan2/compile V=s 
+make package/botan/clean
+make package/botan/dirclean
+make package/botan/compile V=s 
 ```
