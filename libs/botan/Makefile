@@ -46,7 +46,6 @@ endef
 define Package/botan2
   $(call Package/botan2/Default)
   TITLE+=botan
-  DEPENDS:= +openssl
 endef
 
 define Package/botan2/description
