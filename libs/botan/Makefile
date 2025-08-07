@@ -16,23 +16,13 @@ PKG_SOURCE_URL:=https://github.com/coolshou/botan.git
 # which git commit should we use
 PKG_SOURCE_VERSION:=935055e839794a076d209c9e9a1e9cd2255aae01
 PKG_BUILD_DIR=$(BUILD_DIR)/botan-$(PKG_VERSION)
-PKG_BUILD_PARALLEL:=1
+PKG_BUILD_PARALLEL:=0
 PKG_USE_MIPS16:=0
-PKG_BUILD_DEPENDS:=
-
-PKG_MAINTAINER:=jimmy
+PKG_BUILD_DEPENDS:=openssl
+PKG_MAINTAINER:=Jimmy
 
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/nls.mk
-
-
-# not using sstrip here as this fucks up the .so's somehow
-STRIP:=/bin/true
-RSTRIP:= \
-  NM="$(TOOLCHAIN_DIR)/bin/$(TARGET_CROSS)nm" \
-  STRIP="$(STRIP)" \
-  STRIP_KMOD="$(STRIP)" \
-  $(SCRIPT_DIR)/rstrip.sh
+include $(INCLUDE_DIR)/version.mk
 
 define Package/botan2/Default
   SECTION:=libs
@@ -52,14 +42,14 @@ define Package/botan2/description
 	Botan (Japanese for peony flower) is a cryptography library released under the permissive Simplified BSD license.
 endef
 
-define Build/InstallDev
-	$(MAKE) -C $(PKG_BUILD_DIR) install
-	$(CP) $(PKG_BUILD_DIR)/libbotan-2.a $(TOOLCHAIN_DIR)/lib/
-endef
-
 define Package/botan2/install
 	$(INSTALL_DIR) $(1)/usr/lib/
 	$(CP) $(PKG_BUILD_DIR)/libbotan.so* $(1)/usr/lib/
+endef
+
+define Build/InstallDev
+	$(MAKE) -C $(PKG_BUILD_DIR) install
+	$(CP) $(PKG_BUILD_DIR)/libbotan-2.a $(TOOLCHAIN_DIR)/lib/
 endef
 
 define Build/Configure
