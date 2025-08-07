@@ -44,7 +44,7 @@ endef
 
 define Package/botan/install
 	$(INSTALL_DIR) $(1)/usr/lib/
-	$(CP) $(PKG_BUILD_DIR)/libbotan.so* $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/libbotan-2.so* $(1)/usr/lib/
 endef
 
 define Build/InstallDev
