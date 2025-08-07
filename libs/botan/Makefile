@@ -24,9 +24,7 @@ PKG_MAINTAINER:=jimmy
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
-#include $(TARGET_LDFLAGS)/nls.mk
 
-#-include $(if $(DUMP),,./files/qmake.mk)
 
 # not using sstrip here as this fucks up the .so's somehow
 STRIP:=/bin/true
