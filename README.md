@@ -4,7 +4,7 @@ botan2 for openwrt
 
 1. feed.conf
 ```
-src-git botan2 https://github.com/coolshou/botan-openwrt.git
+src-git botan https://github.com/coolshou/botan-openwrt.git
 ```
 
 2. build

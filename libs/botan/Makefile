@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=botan2
+PKG_NAME:=botan
 PKG_VERSION:=2.19
 PKG_RELEASE:=5
 
@@ -24,25 +24,25 @@ PKG_MAINTAINER:=Jimmy
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/version.mk
 
-define Package/botan2/Default
+define Package/botan/Default
   SECTION:=libs
   CATEGORY:=Libraries
-  SUBMENU:=botan2
-  TITLE:=Botan2
+  SUBMENU:=botan
+  TITLE:=botan
   URL:=https://github.com/coolshou/botan.git
   DEPENDS:=+librt +zlib +libstdcpp +libgcc +glib2 +libpthread +libatomic +libopenssl3
 endef
 
-define Package/botan2
+define Package/botan
   $(call Package/botan2/Default)
   TITLE+=botan
 endef
 
-define Package/botan2/description
+define Package/botan/description
 	Botan (Japanese for peony flower) is a cryptography library released under the permissive Simplified BSD license.
 endef
 
-define Package/botan2/install
+define Package/botan/install
 	$(INSTALL_DIR) $(1)/usr/lib/
 	$(CP) $(PKG_BUILD_DIR)/libbotan.so* $(1)/usr/lib/
 endef
