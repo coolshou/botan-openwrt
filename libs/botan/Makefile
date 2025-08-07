@@ -34,7 +34,7 @@ define Package/botan/Default
 endef
 
 define Package/botan
-  $(call Package/botan2/Default)
+  $(call Package/botan/Default)
   TITLE+=botan
 endef
 
@@ -70,4 +70,4 @@ define Build/Compile
 	$(MAKE) -j4 -C $(PKG_BUILD_DIR)
 endef
 
-$(eval $(call BuildPackage,botan2))
+$(eval $(call BuildPackage,botan))
