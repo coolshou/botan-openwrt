@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=botan
+PKG_NAME:=botan2
 PKG_VERSION:=2.19
 PKG_RELEASE:=5
 
@@ -36,20 +36,22 @@ RSTRIP:= \
   STRIP_KMOD="$(STRIP)" \
   $(SCRIPT_DIR)/rstrip.sh
 
-define Package/botan/Default
+define Package/botan2/Default
   SECTION:=libs
   CATEGORY:=Libraries
   SUBMENU:=botan
-  TITLE:=botan
-  URL:=http://qt-project.org
-  DEPENDS:=+librt +zlib +libstdcpp +libgcc +libpcre2-16 +glib2 +libpthread +libudev +libatomic +libopenssl3 @!LINUX_2_6
+  TITLE:=Botan2
+  URL:=https://github.com/coolshou/botan.git
+  DEPENDS:=+librt +zlib +libstdcpp +libgcc +glib2 +libpthread +libatomic +libopenssl3
 endef
 
-define Package/botan
-  $(call Package/botan/Default)
+define Package/botan2
+  $(call Package/botan2/Default)
   TITLE+=botan
 endef
-
+define Package/botan2/description
+	Botan (Japanese for peony flower) is a cryptography library released under the permissive Simplified BSD license.
+endef
 
 define Build/Configure
 	( cd $(PKG_BUILD_DIR) ; \
@@ -60,6 +62,7 @@ define Build/Configure
 		--ar-options="cqs" \
 		--cxxflags="$(TARGET_CFLAGS) $(EXTRA_CFLAGS)" \
 		--ldflags="$(TARGET_LDFLAGS) $(EXTRA_LDFLAGS)" \
+		--libdir=$(TARGET_LIBDIRS) \
 		--without-sphinx \
 		--without-rst2man \
 	)
@@ -90,10 +93,10 @@ define Build/InstallDev
 	$(CP) $(PKG_BUILD_DIR)/libbotan-2.a $(TOOLCHAIN_DIR)/lib/
 endef
 
-define Package/botan/install
+define Package/botan2/install
 	$(INSTALL_DIR) $(1)/usr/lib/
 	$(CP) $(PKG_BUILD_DIR)/libbotan.so* $(1)/usr/lib/
 endef
 
 
-$(eval $(call BuildPackage,botan))
+$(eval $(call BuildPackage,botan2))
