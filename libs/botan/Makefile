@@ -55,12 +55,13 @@ endef
 
 define Build/Configure
 	( cd $(PKG_BUILD_DIR) ; \
+		CXXFLAGS += -std=c++17 \
 		python3 ./configure.py \
 		--cpu=$(ARCH) \
 		--cc-bin=$(TARGET_CROSS)g++ \
 		--ar-command="$(TARGET_CROSS)ar" \
 		--ar-options="cqs" \
-		--cxxflags="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) -std=c++17" \
+		--cxxflags="$(TARGET_CFLAGS) $(EXTRA_CFLAGS)" \
 		--ldflags="$(TARGET_LDFLAGS) $(EXTRA_LDFLAGS)" \
 		--prefix=$(TOOLCHAIN_DIR) \
 		--without-sphinx \
