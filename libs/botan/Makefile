@@ -55,7 +55,6 @@ endef
 
 define Build/Configure
 	( cd $(PKG_BUILD_DIR) ; \
-		CXXFLAGS += -std=c++17 \
 		python3 ./configure.py \
 		--cpu=$(ARCH) \
 		--cc-bin=$(TARGET_CROSS)g++ \
