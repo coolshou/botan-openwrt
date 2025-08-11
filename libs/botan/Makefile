@@ -60,7 +60,7 @@ define Build/Configure
 		--cc-bin=$(TARGET_CROSS)g++ \
 		--ar-command="$(TARGET_CROSS)ar" \
 		--ar-options="cqs" \
-		--cxxflags="$(TARGET_CFLAGS) $(EXTRA_CFLAGS)" \
+		--cxxflags="$(TARGET_CFLAGS) $(EXTRA_CFLAGS) -std=c++17" \
 		--ldflags="$(TARGET_LDFLAGS) $(EXTRA_LDFLAGS)" \
 		--prefix=$(TOOLCHAIN_DIR) \
 		--without-sphinx \
